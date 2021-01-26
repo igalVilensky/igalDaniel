@@ -1,50 +1,3 @@
-/* Vowels. Create a function that takes a string in its parameters and counts the number of vowels (i.e. in English, “a, e, i, o, u”) in the string.
-i.e. findVowels(“this is a string”) ➞ 4 */
-
-const vowels = ["a", "e", "i", "o", "u"];
-const findVowels = (str) => {
-  let result = 0;
-
-  for (let i = 0; i <= str.length; i++) {
-    if (vowels.includes(str.charAt(i))) {
-      result++;
-    }
-  }
-  return result;
-};
-
-console.log(findVowels("this is a text for testing my code"));
-
-const vow = ["a", "e", "i", "o", "u"];
-
-const findVowels1 = (str) => {
-  let result = 0;
-  for (let i = 0; i <= str.length; i++) {
-    if (vow.includes(str.charAt(i))) {
-      result++;
-    }
-  }
-  return result;
-};
-
-console.log(findVowels("this is a texIgal Vilenskyt for testing my code"));
-
-const noDup = (numberList) => {
-  let result = [];
-  for (let i = 0; i < numberList.length; i++) {
-    if (result.includes(numberList[i])) {
-    } else {
-      result.push(numberList[i]);
-    }
-  }
-  return result;
-};
-
-console.log(noDup([1, 4, 4, 7, 7, 7]));
-console.log(noDup([1, 6, 6, 9, 9]));
-console.log(noDup([2, 2, 2, 2, 2, 2]));
-console.log(noDup([5, 10, 15, 20, 25]));
-
 /* One is not like the others Create a function that takes an array of numbers and return the number that’s unique.
 
 Examples:
@@ -80,6 +33,24 @@ const unique2 = (arr) => {
 console.log(unique2([3, 3, 8, 3, 3, 3]));
 console.log(unique2([1, 1, 1, 1, 5]));
 console.log(unique2([0, 0, 0.77, 0, 0]));
+
+console.log("-------------");
+
+const unique = (arr) => {
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    let currentValue = arr[i];
+    if (arr.indexOf(arr[i]) == arr.lastIndexOf(arr[i])) {
+      // 0
+      result.push(currentValue);
+    }
+  }
+  return result.join(", ");
+};
+console.log(unique([3, 3, 3, 7, 3, 3]));
+
+console.log(unique([0, 1, 1, 1, 1, 1, 1, 1]));
+
 /* The Greater Numbers Create a function which accepts two arguments: the first argument being an array of numbers, and the second argument being a number. 
 The function should return the elements of the array which are greater than the second argument.
 
@@ -110,7 +81,7 @@ Example: longestWord("this is a web development course") ➞ "development" */
 
 const longestWord = (str) => {
   const splStrArray = str.split(" "); //initialize a variable to store the longest word
-  /* console.log(splStrArray); */
+  console.log(splStrArray);
   let result = "";
   for (let i = 0; i < splStrArray.length; i++) {
     if (splStrArray[i].length > result.length) {
@@ -163,20 +134,16 @@ hackerSpeak("programming is fun") ➞ "pr0gr4mm1ng 15 fun"
 hackerSpeak("become a coder") ➞ "b3c0m3 4 c0d3r" */
 
 const hackerSpeak = (str) => {
-  let result = "";
   let strToArray2 = str.split("");
   /* console.log(strToArray2); */
   for (let i = 0; i <= str.length; i++) {
     if (strToArray2[i] == "a") {
       strToArray2[i] = "4";
-    }
-    if (strToArray2[i] == "i") {
+    } else if (strToArray2[i] == "i") {
       strToArray2[i] = "1";
-    }
-    if (strToArray2[i] == "s") {
+    } else if (strToArray2[i] == "s") {
       strToArray2[i] = "5";
-    }
-    if (strToArray2[i] == "o") {
+    } else if (strToArray2[i] == "o") {
       strToArray2[i] = "0";
     }
   }
@@ -191,21 +158,30 @@ Examples:
 toCamelCase("hello_world") ➞ "helloWorld"
 toCamelCase("javascript_is_fun") ➞ "javaScriptIsFun" */
 
-const toCamelCase = (str) => {
+/* const toCamelCase = (str) => {
   let strToArray3 = str.split("");
 
   for (let i = 1; i <= str.length; i++) {
     if (strToArray3[i] == "_") {
       strToArray3[i] = "";
-    }
-    if (strToArray3[i] == "_") {
-      strToArray3[i].indexOf("") = strToArray3.toUpperCase();
+      strToArray3[i + 1].toUpperCase();
     }
   }
+
   return strToArray3.join("");
 };
 
-console.log(toCamelCase("hello_world"));
+console.log(toCamelCase("hello_world")); */
+
+const toCamelCase = (str) => {
+  let strToArr = str.toLowerCase().split("_");
+  console.log(strToArr);
+  for (let i = 1; i < strToArr.length; i++) {
+    strToArr[i] = strToArr[i][0].toUpperCase() + strToArr[i].slice(1);
+  }
+  return strToArr.join("");
+};
+console.log(toCamelCase("hello_world_see"));
 
 /* Is it Symmetrical? Create a function that takes a number as an argument and returns true or false depending on whether the number is symmetrical or not. 
 NB: A number is symmetrical when it is the same as its reverse.
@@ -219,13 +195,10 @@ isSymmetrical(9939) ➞ false
 isSymmetrical(1112111) ➞ true */
 
 const isSymmetrical = (num) => {
-  let result;
+  let result = false;
   for (let i = 0; num.length; i++) {
     if (parseInt(num[i].toString().split("").reverse().join("")) == num) {
       result = true;
-    }
-    if (parseInt(num[i].toString().split("").reverse().join("")) !== num) {
-      result = "false";
     }
   }
   return result;
@@ -243,10 +216,37 @@ pigLatin("Cats are great pets.") ➞ "Atscay areway reatgay etspay."
 pigLatin("Tom got a small piece of pie.") ➞ "Omtay otgay away allsmay iecepay ofway iepay."
 pigLatin("He told us a very exciting tale.") ➞ "Ehay oldtay usway away eryvay excitingway aletay." */
 
-const pigLatin = () => {
-  let result;
+const pigLatin = (str) => {
+  /* let dot = "";
+  if (str.charAt(str.length - 1) == ".") dot = "."; */
 
-  return result;
+  const lowerCase = str.toLowerCase().slice(0, -1);
+  console.log(lowerCase);
+  const splitStr = lowerCase.split(" ");
+  console.log(splitStr);
+  const vowels = ["a", "e", "i", "o", "u"];
+  const pigTranslation = [];
+  for (let i = 0; i < splitStr.length; i++) {
+    let firstChar = splitStr[i][0];
+
+    let remainder = splitStr[i].slice(1, splitStr[i].length);
+    if (vowels.includes(firstChar)) {
+      // checking if i is truthy or falsy.
+      //If falsy, then it's the first word because it's 0.
+      let firstCharVowel =
+        (i ? firstChar : firstChar.toUpperCase()) + remainder + "way";
+      pigTranslation.push(firstCharVowel);
+    } else {
+      if (i === 0) {
+        let firstCharRem = remainder[0];
+        let wordRemainder = remainder.slice(1, remainder.length);
+        remainder = firstCharRem.toUpperCase() + wordRemainder;
+      }
+      let firstCharConsonant = remainder + firstChar + "ay";
+      pigTranslation.push(firstCharConsonant);
+    }
+  }
+
+  return pigTranslation.join(" ");
 };
-
-console.log(pigLatin("Cats are great pets."));
+console.log(pigLatin("Tom got a small piece of pie."));
